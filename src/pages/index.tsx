@@ -36,7 +36,7 @@ export default function Home() {
       <div className="flex gap-4">
         <Link href="/pokemon">
           <Button className="rounded-2xl bg-pink-500 px-[3rem]">
-            Let's try it
+            Let&apos;s try it
           </Button>
         </Link>
       </div>

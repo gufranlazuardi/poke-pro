@@ -7,7 +7,7 @@ const DontHavePokemon = () => {
     <>
       <div className="flex flex-col gap-[1.5rem] justify-center items-center pt-[10rem]">
         <h1 className="text-2xl text-center">
-          You didn't catch any pokemon, please catch first
+          You didn&apos;t catch any pokemon, please catch first
         </h1>
         <Link href="/pokemon">
           <Button className="w-fit">Catch</Button>

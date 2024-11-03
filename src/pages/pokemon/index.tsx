@@ -47,11 +47,9 @@ const PokemonPage = () => {
     <div className="w-full min-h-screen flex flex-col ">
       <div className="flex gap-2 mt-[2rem] items-start">
         <Dialog>
-          <DialogTrigger>
-            <div className="flex py-2 px-4 items-center border gap-4 rounded-lg border-slate-400 bg-gray-300 cursor-pointer">
-              <Search color="gray" size={15} />
-              <p className="text-sm text-gray-600">Search pokemon</p>
-            </div>
+          <DialogTrigger className="flex py-1.5 px-4 items-center border gap-4 rounded-lg border-slate-400 bg-gray-300 cursor-pointer">
+            <Search color="gray" size={15} />
+            <p className="text-sm text-gray-600">Search pokemon</p>
           </DialogTrigger>
           <DialogContent className="absolute top-40">
             <DialogHeader>
@@ -64,9 +62,10 @@ const PokemonPage = () => {
             </DialogHeader>
           </DialogContent>
         </Dialog>
-        <div className="flex bg-gray-300 rounded-lg border border-slate-400 ">
+
+        <div>
           <Select>
-            <SelectTrigger>
+            <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
               <div className="flex items-center gap-4 cursor-pointer">
                 <Filter color="gray" size={15} />
                 <p className="text-sm text-gray-600">
@@ -81,9 +80,22 @@ const PokemonPage = () => {
             </SelectContent>
           </Select>
         </div>
-      </div>
 
-      {/* mapping pokemon card */}
+        <div>
+          <Select>
+            <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
+              <div className="flex items-center gap-4 cursor-pointer">
+                <Filter color="gray" size={15} />
+                <p className="text-sm text-gray-600">Sort by</p>
+              </div>
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="light">Desc</SelectItem>
+              <SelectItem value="dark">Asc</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
+      </div>
 
       <div className="mt-4 grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-6 flex-wrap items-center justify-center overflow-auto">
         {pokemonList.map((pokemon) => (

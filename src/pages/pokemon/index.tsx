@@ -22,6 +22,9 @@ import { PokemonDetail, ResponseResults } from "@/api/types";
 
 const PokemonPage = () => {
   const [pokemonList, setPokemonList] = useState<PokemonDetail[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>("");
+  const [filterType, setFilterType] = useState<string>("all");
+  const [sortOrder, setSortOrder] = useState<string>("asc");
 
   async function fetchPokemonList() {
     try {
@@ -43,6 +46,26 @@ const PokemonPage = () => {
     fetchPokemonList();
   }, []);
 
+  const filteredPokemonList = pokemonList.filter((pokemon) => {
+    const matchesSearch = pokemon.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesType =
+      filterType === "all" ||
+      (filterType
+        ? pokemon.types.some((type) => type.type.name === filterType)
+        : true);
+    return matchesSearch && matchesType;
+  });
+
+  const sortedPokemonList = filteredPokemonList.sort((a, b) => {
+    if (sortOrder === "asc") {
+      return a.name.localeCompare(b.name);
+    } else {
+      return b.name.localeCompare(a.name);
+    }
+  });
+
   return (
     <div className="w-full min-h-screen flex flex-col ">
       <div className="flex gap-2 mt-[2rem] items-start">
@@ -54,7 +77,11 @@ const PokemonPage = () => {
           <DialogContent className="absolute top-40">
             <DialogHeader>
               <DialogTitle className="mr-4">
-                <Input placeholder="Search pokemon..." />
+                <Input
+                  placeholder="Search pokemon..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+                />
               </DialogTitle>
               <DialogDescription className="pt-2">
                 Wanna help to find your favorite pokemon?
@@ -64,41 +91,41 @@ const PokemonPage = () => {
         </Dialog>
 
         <div>
-          <Select>
+          <Select onValueChange={(value) => setFilterType(value)}>
             <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
-              <div className="flex items-center gap-4 cursor-pointer">
-                <Filter color="gray" size={15} />
-                <p className="text-sm text-gray-600">
-                  Filter by type
-                </p>
-              </div>
+              <SelectValue
+                placeholder="Filter by type"
+                className="placeholder:text-pink-500"
+              />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">Light</SelectItem>
-              <SelectItem value="dark">Dark</SelectItem>
-              <SelectItem value="system">System</SelectItem>
+              <SelectItem value="all">All</SelectItem>
+              <SelectItem value="fire">Fire</SelectItem>
+              <SelectItem value="water">Water</SelectItem>
+              <SelectItem value="grass">Grass</SelectItem>
+              <SelectItem value="grass">Flying</SelectItem>
+              <SelectItem value="grass">Bug</SelectItem>
+              <SelectItem value="grass">Normal</SelectItem>
+              <SelectItem value="grass">Poison</SelectItem>
             </SelectContent>
           </Select>
         </div>
 
         <div>
-          <Select>
+          <Select onValueChange={(value) => setSortOrder(value)}>
             <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
-              <div className="flex items-center gap-4 cursor-pointer">
-                <Filter color="gray" size={15} />
-                <p className="text-sm text-gray-600">Sort by</p>
-              </div>
+              <SelectValue placeholder="Sort by" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="light">Desc</SelectItem>
-              <SelectItem value="dark">Asc</SelectItem>
+              <SelectItem value="asc">Ascending</SelectItem>
+              <SelectItem value="desc">Descending</SelectItem>
             </SelectContent>
           </Select>
         </div>
       </div>
 
       <div className="mt-4 grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-6 flex-wrap items-center justify-center overflow-auto">
-        {pokemonList.map((pokemon) => (
+        {sortedPokemonList.map((pokemon) => (
           <PokemonCard key={pokemon.id} data={pokemon} />
         ))}
       </div>

@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Filter, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import PokemonCard from "@/components/PokemonCard";
 import {
@@ -70,7 +70,7 @@ const PokemonPage = () => {
     <div className="w-full min-h-screen flex flex-col ">
       <div className="flex gap-2 mt-[2rem] items-start">
         <Dialog>
-          <DialogTrigger className="flex py-1.5 px-4 items-center border gap-4 rounded-lg border-slate-400 bg-gray-300 cursor-pointer">
+          <DialogTrigger className="flex py-1.5 px-2 xl:px-4 items-center border gap-4 rounded-lg border-slate-400 bg-gray-300 cursor-pointer">
             <Search color="gray" size={15} />
             <p className="text-sm text-gray-600">Search pokemon</p>
           </DialogTrigger>

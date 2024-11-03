@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import React from "react";
 import { pokemonData } from "../api/sample-pokemon";
+import { Button } from "@/components/ui/button";
 
 const DetailPage = () => {
   const router = useRouter();
   const { id } = router.query;
 
-  // Find the selected Pokémon based on the ID
   const pokemon = pokemonData.find((p) => p.id === id);
 
   if (!pokemon) {
@@ -19,18 +19,19 @@ const DetailPage = () => {
       <img
         src={pokemon.image}
         alt={pokemon.title}
-        width={300}
-        height={300}
+        width={200}
+        height={200}
       />
-      <div className="mt-4">
+      <div className="mt-4 gap-2 flex flex-col items-center">
         <h3 className="text-2xl font-semibold">Type:</h3>
         <ul>
           {pokemon.type.map((type, index) => (
-            <li key={index} className="text-lg">
+            <li key={index} className="text-md">
               {type}
             </li>
           ))}
         </ul>
+        <Button>Catch</Button>
       </div>
     </div>
   );

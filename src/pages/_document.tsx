@@ -7,7 +7,6 @@ export default function Document() {
     <Html lang="en">
       <Head />
       <Navbar />
-      <Separator className="bg-slate-400" />
       <body>
         <Main />
         <NextScript />

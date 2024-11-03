@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   Dialog,
   DialogContent,
@@ -17,12 +17,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { pokemonData } from "../api/sample-pokemon";
-import Link from "next/link";
+import { getPokemon, getPokemonDetail } from "@/api";
+import { PokemonDetail, ResponseResults } from "@/api/types";
 
 const PokemonPage = () => {
+  const [pokemonList, setPokemonList] = useState<PokemonDetail[]>([]);
+
+  async function fetchPokemonList() {
+    try {
+      const response = await getPokemon();
+      const results = response.results;
+
+      const detailsPromises = results.map(
+        (pokemon: ResponseResults) => getPokemonDetail(pokemon.url)
+      );
+
+      const pokemonDetails = await Promise.all(detailsPromises);
+      setPokemonList(pokemonDetails);
+    } catch (error) {
+      console.error("Failed to fetch Pokémon data:", error);
+    }
+  }
+
+  useEffect(() => {
+    fetchPokemonList();
+  }, []);
+
   return (
-    <div className="w-full min-h-screen flex flex-col px-[1rem] xl:px-[8rem] lg:px-[8rem]">
+    <div className="w-full min-h-screen flex flex-col ">
       <div className="flex gap-2 mt-[2rem] items-start">
         <Dialog>
           <DialogTrigger>
@@ -64,10 +86,8 @@ const PokemonPage = () => {
       {/* mapping pokemon card */}
 
       <div className="mt-4 grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-6 flex-wrap items-center justify-center overflow-auto">
-        {pokemonData.map((pokemon) => (
-          <Link href={`/pokemon/${pokemon.id}`} key={pokemon.id}>
-            <PokemonCard data={pokemon} />
-          </Link>
+        {pokemonList.map((pokemon) => (
+          <PokemonCard key={pokemon.id} data={pokemon} />
         ))}
       </div>
     </div>

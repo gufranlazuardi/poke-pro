@@ -8,7 +8,7 @@ import { ShoppingBag } from "lucide-react";
 const Navbar = () => {
   return (
     <>
-      <div className="flex w-full justify-between px-[2rem] pt-[0.5rem] pb-2 z-50 fixed top-0 bg-white dark:bg-black border-b border-b-gray-300">
+      <div className="flex w-full justify-between px-[2rem] pt-[0.5rem] pb-2 z-50 fixed top-0 bg-white border-b border-b-gray-300">
         <div className="flex gap-[2rem] items-center">
           <Link href="/">
             <Image

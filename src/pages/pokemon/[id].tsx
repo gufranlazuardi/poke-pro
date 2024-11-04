@@ -75,7 +75,7 @@ const DetailPage = () => {
           <div className="w-[30rem] h-[30rem] border flex flex-col gap-8 justify-center items-center bg-white rounded-xl">
             <h1 className="text-4xl font-bold">Congratulations!</h1>
             <div className="flex flex-col items-center">
-              <p className="text-xl">You've caught</p>
+              <p className="text-xl">You&apos;ve caught</p>
               <p className="font-bold text-2xl">{pokemon.title}</p>
             </div>
             <div className="flex flex-col items-center w-full px-16">

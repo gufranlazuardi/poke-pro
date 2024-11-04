@@ -67,7 +67,7 @@ const PokemonPage = () => {
   });
 
   return (
-    <div className="w-full min-h-screen flex flex-col ">
+    <div className="w-full min-h-screen flex flex-col">
       <div className="flex gap-2 mt-[2rem] items-start">
         <Dialog>
           <DialogTrigger className="flex py-1.5 px-2 xl:px-4 items-center border gap-4 rounded-lg border-slate-400 bg-gray-300 cursor-pointer">
@@ -80,7 +80,7 @@ const PokemonPage = () => {
                 <Input
                   placeholder="Search pokemon..."
                   value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)} // Update search query
+                  onChange={(e) => setSearchQuery(e.target.value)}
                 />
               </DialogTitle>
               <DialogDescription className="pt-2">
@@ -90,37 +90,39 @@ const PokemonPage = () => {
           </DialogContent>
         </Dialog>
 
-        <div>
-          <Select onValueChange={(value) => setFilterType(value)}>
-            <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
-              <SelectValue
-                placeholder="Filter by type"
-                className="placeholder:text-pink-500"
-              />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">All</SelectItem>
-              <SelectItem value="fire">Fire</SelectItem>
-              <SelectItem value="water">Water</SelectItem>
-              <SelectItem value="grass">Grass</SelectItem>
-              <SelectItem value="grass">Flying</SelectItem>
-              <SelectItem value="grass">Bug</SelectItem>
-              <SelectItem value="grass">Normal</SelectItem>
-              <SelectItem value="grass">Poison</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
+        <div className="flex gap-2">
+          <div>
+            <Select onValueChange={(value) => setFilterType(value)}>
+              <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
+                <SelectValue
+                  placeholder="Filter by type"
+                  className="placeholder:text-pink-500"
+                />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All</SelectItem>
+                <SelectItem value="fire">Fire</SelectItem>
+                <SelectItem value="water">Water</SelectItem>
+                <SelectItem value="grass">Grass</SelectItem>
+                <SelectItem value="grass">Flying</SelectItem>
+                <SelectItem value="grass">Bug</SelectItem>
+                <SelectItem value="grass">Normal</SelectItem>
+                <SelectItem value="grass">Poison</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
-        <div>
-          <Select onValueChange={(value) => setSortOrder(value)}>
-            <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
-              <SelectValue placeholder="Sort by" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="asc">Ascending</SelectItem>
-              <SelectItem value="desc">Descending</SelectItem>
-            </SelectContent>
-          </Select>
+          <div>
+            <Select onValueChange={(value) => setSortOrder(value)}>
+              <SelectTrigger className="bg-gray-300 rounded-lg border border-slate-400">
+                <SelectValue placeholder="Sort by" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="asc">Ascending</SelectItem>
+                <SelectItem value="desc">Descending</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </div>
       </div>
 

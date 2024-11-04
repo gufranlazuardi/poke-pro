@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { PokemonDetail } from "@/api/types";
 import Link from "next/link";
 

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { pokemonData } from "../api/sample-pokemon";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
+import { Input } from "@/components/ui/input";
 
 const getDataFromLocalStorage = () => {
   if (typeof window !== "undefined") {
@@ -71,7 +72,7 @@ const DetailPage = () => {
         </div>
       </div>
       {catchPoke && (
-        <div className="w-full flex justify-center absolute top-32">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <div className="w-[30rem] h-[30rem] border flex flex-col gap-8 justify-center items-center bg-white rounded-xl">
             <h1 className="text-4xl font-bold">Congratulations!</h1>
             <div className="flex flex-col items-center">
@@ -81,7 +82,7 @@ const DetailPage = () => {
             <div className="flex flex-col items-center w-full px-16">
               <p>Nickname</p>
               <form className="flex flex-col items-center gap-4">
-                <input
+                <Input
                   type="text"
                   className="border w-full h-8 justify-center text-center rounded-md bg-white"
                   onChange={(e) => setNickName(e.target.value)}

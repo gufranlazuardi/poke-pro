@@ -13,6 +13,14 @@ interface PokemonData {
 
 const MyPokemon = () => {
   const [myPokemons, setMyPokemons] = useState<PokemonData[]>([]);
+
+  useEffect(() => {
+    const data = localStorage.getItem("myPokemon");
+    if (data) {
+      setMyPokemons(JSON.parse(data));
+    }
+  }, []);
+
   const handleDelete = (nickname: string) => {
     const filter = myPokemons.filter((e: any) => {
       return e.nickname !== nickname;
@@ -24,13 +32,6 @@ const MyPokemon = () => {
   if (myPokemons.length === 0) {
     return <DontHavePokemon />;
   }
-
-  useEffect(() => {
-    const data = localStorage.getItem("myPokemon");
-    if (data) {
-      setMyPokemons(JSON.parse(data));
-    }
-  }, []);
 
   return (
     <div className="flex flex-wrap gap-4 p-4">

@@ -43,6 +43,7 @@ const DetailPage = () => {
       description: "Pokemon added to your My Pokemon list.",
       variant: "default",
     });
+    router.push("/my-pokemon");
   };
 
   if (!pokemon) {
